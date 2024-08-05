@@ -55,3 +55,13 @@ window.onload = function () {
     let display = timerElement;
     startCountdown(countDownDate, display);
 };
+
+document.getElementById('fullscreen-btn').addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+            console.error("Erreur lors du passage en plein écran : ", err);
+        });
+    } else {
+        document.exitFullscreen();
+    }
+});
