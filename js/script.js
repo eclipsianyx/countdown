@@ -8,13 +8,11 @@ function startCountdown(endDate, display) {
     function updateTimer() {
         var now = new Date().getTime();
         var distance = endDate - now;
-        // console.log(distance)
 
         // Calculer le pourcentage de temps écoulé
         let totalDuration = endDate - new Date("Aug 5, 2023 14:15:00").getTime(); // Remplacez par la date de début de votre timer
         let elapsed = 87300000;
         let percentage = (elapsed - distance) / elapsed * 100;
-        console.log(percentage);
 
         // Mettre à jour l'arrière-plan        
         if (window.innerWidth > 1000) {
