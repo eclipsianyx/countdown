@@ -2,16 +2,16 @@ let timerElement = document.getElementById('timer');
 let timerContainer = document.querySelector('.timer-container');
 let percentageElement = document.querySelector('.percentage');
 
-let countDownDate = new Date("Aug 6, 2024 14:00:00").getTime();
+var countDownStartDate = new Date("Aug 5, 2024 14:15:00").getTime();
+var countDownEndDate = new Date("Aug 6 2024 13:45:00").getTime();
 
-function startCountdown(endDate, display) {
+function startCountdown(startDate, endDate, display) {
     function updateTimer() {
         var now = new Date().getTime();
         var distance = endDate - now;
 
         // Calculer le pourcentage de temps écoulé
-        let totalDuration = endDate - new Date("Aug 5, 2023 14:15:00").getTime(); // Remplacez par la date de début de votre timer
-        let elapsed = 87300000;
+        let elapsed = endDate - startDate;
         let percentage = (elapsed - distance) / elapsed * 100;
 
         // Mettre à jour l'arrière-plan        
@@ -51,7 +51,7 @@ function startCountdown(endDate, display) {
 // Initialiser le compte à rebours à une date précise
 window.onload = function () {
     let display = timerElement;
-    startCountdown(countDownDate, display);
+    startCountdown(countDownStartDate, countDownEndDate, display);
 };
 
 document.getElementById('fullscreen-btn').addEventListener('click', () => {
@@ -62,4 +62,36 @@ document.getElementById('fullscreen-btn').addEventListener('click', () => {
     } else {
         document.exitFullscreen();
     }
+});
+
+let countdownStart = document.getElementById('countdownStart');
+let countdownEnd = document.getElementById('countdownEnd');
+var settingspressed = 0;
+
+document.getElementById('settings-btn').addEventListener('click', () => {
+    if (settingspressed === 0) {
+        timerContainer.style.display = "none";
+        percentageElement.style.display = "none";
+        countdownStart.style.display = 'block';
+        countdownEnd.style.display = 'block';
+        settingspressed = 1;
+    } else if (settingspressed === 1) {
+        timerContainer.style.display = "flex";
+        percentageElement.style.display = "flex";
+        countdownStart.style.display = 'none';
+        countdownEnd.style.display = 'none';
+        settingspressed = 0;
+    }
+});
+
+countdownStart.addEventListener('input', () => {
+    countDownStartDate = new Date(countdownStart.value).getTime();
+    let display = timerElement;
+    startCountdown(countDownStartDate, countDownEndDate, display);
+});
+
+countdownEnd.addEventListener('input', () => {
+    countDownEndDate = new Date(countdownEnd.value).getTime();
+    let display = timerElement;
+    startCountdown(countDownStartDate, countDownEndDate, display);
 });
