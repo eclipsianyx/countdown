@@ -31,9 +31,19 @@ body {
 }
 
 #fullscreen-btn {
-    position: fixed;
     bottom: 20px;
     right: 20px;
+}
+
+#settings-btn {
+    display: none;
+    top: 20px;
+    right: 20px;
+}
+
+#fullscreen-btn,
+#settings-btn {
+    position: fixed;
     background-color: black;
     color: white;
     border: none;
@@ -45,8 +55,14 @@ body {
     z-index: 1000;
 }
 
-#fullscreen-btn:hover {
+#fullscreen-btn:hover,
+#settings-btn:hover {
     background-color: #333;
+}
+
+#countdownStart,
+#countdownEnd {
+    display: none;
 }
 
 @media (max-width: 1000px) {
